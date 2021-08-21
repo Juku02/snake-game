@@ -3,14 +3,16 @@
 #include <time.h>
 #include <cstdio>
 #include <unistd.h>
+extern "C"{
 #include <ncurses.h>
+}
 
 int X[10000], Y[10000];
 //e - empty area, s - snake position, f - food position
 
 struct controls
 {
-    int width, height, speed = 5;
+    int width, height, speed = 10;
     int up, down, leftd, rightd, key;
     char direction = 'r'; // direction r-right, l-left, u-up, d-down
 };
@@ -125,7 +127,7 @@ void snakePosition(struct snake *s, struct controls *co, struct matrix *ma)
 
 void foodPosition(struct matrix *mat, struct food *f, struct controls *co)
 {
-    //losowanie pola dla jedzenia
+    srand(time(NULL));
     do
     {
         f->foodX = rand() % co->width;
@@ -165,12 +167,18 @@ void drawBoard(struct controls *con, struct matrix *mat, struct snake *sk, struc
                   << mat->pion; //left frame
         for (j = 0; j < con->width; j++)
         {
-            if (mat->matrix[j][i] == 'e')
+            switch (mat->matrix[j][i])
+            {
+            case 'e':
                 std::cout << "  ";
-            if (mat->matrix[j][i] == 's')
+                break;
+            case 's':
                 std::cout << sk->snake << sk->snake;
-            if (mat->matrix[j][i] == 'f')
+                break;
+            case 'f':
                 std::cout << fo->foodChar << fo->foodChar;
+                break;
+            }
         }
         std::cout << mat->pion; //right frame
     }
@@ -190,85 +198,17 @@ int main(int argc, char const *argv[])
     struct matrix ma;
     struct snake sk;
     struct food fo;
-
+    
     initGame(&con, &ma, &sk, &fo);
 
     system("clear");
 
+    initscr();
+
     drawBoard(&con, &ma, &sk, &fo);
 
-    // for(;;)
-    // {
-
-    //     ma.count++;
-    //     X[ma.count]=sk.snakeX;
-    //     Y[ma.count]=sk.snakeY;
-
-    //    sleep(1/con.speed);
-    //     if(getchar())
-    //     {
-    //         con.key=getchar();
-    //         if(con.key==224) con.key+=getchar();
-    //         if(con.key==0) con.key-=getchar();
-
-    //         if(con.key==con.up && (con.direction=='l' || con.direction=='r')) con.direction='u';
-    //         if(con.key==con.down && (con.direction=='l' || con.direction=='r')) con.direction='d';
-    //         if(con.key==con.leftd && (con.direction=='u' || con.direction=='d')) con.direction='l';
-    //         if(con.key==con.rightd && (con.direction=='u' || con.direction=='d')) con.direction='r';
-
-    //     }
-
-    //     //snake movement
-    //     if(con.direction=='d') sk.snakeY++;
-    //     if(con.direction=='u') sk.snakeY--;
-    //     if(con.direction=='l') sk.snakeX--;
-    //     if(con.direction=='r') sk.snakeX++;
-
-    //     //wall hit
-    //     if(sk.snakeX==con.width) sk.snakeX=0;
-    //     if(sk.snakeX==-1) sk.snakeX=con.width-1;
-    //     if(sk.snakeY==con.height) sk.snakeY=0;
-    //     if(sk.snakeY==-1) sk.snakeY=con.height-1;
-
-    // //hit yourself
-    // if(matrix[snakeX][snakeY]=='s')
-    // {
-    //     goToXY(0,height+4);
-    //     cout<<endl<<"\aKONIEC GRY. Dlugosc weza wynosi: "<<lenght+1<<" .";
-    //     cout<<endl<<"Nacisnij dwa razy dowolny przycisk by zakonczyc.";
-    //     break;
-    // }
-
-    // //co się dzieje gdy zje
-    // if(matrix[snakeX][snakeY]=='j')
-    // {
-    //     lenght++;
-    //     do
-    //     {
-    //         foodX=rand()%width;
-    //         foodY=rand()%height;
-
-    //     }while(matrix[foodX][foodY]!='p');
-    //         {
-    //             matrix[foodX][foodY]='j';
-    //             goToXY(foodX*2+1,foodY+1);
-    //             cout<<food<<food;
-    //         }
-    // }
-    // else //kasowanie ogona
-    //    {
-    //         matrix[historiaWspolzednejX[count-lenght]][historiaWspolzednejY[count-lenght]]='p';
-    //         goToXY(historiaWspolzednejX[count-lenght]*2+1,historiaWspolzednejY[count-lenght]+1);
-    //         cout<<"  ";
-    //    }
-
-    // matrix[snakeX][snakeY]='w';
-    // goToXY(snakeX*2+1,snakeY+1);
-    // cout<<snake<<snake;
-
-    // } //koniec petli for(;;)
-
-    // getchar();
-
-    return 0;
+    
+    
+    endwin();
+ 
 }
