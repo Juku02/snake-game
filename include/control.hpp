@@ -4,12 +4,15 @@
 class controls
 {
 private:
-    /* data */
+   
 public:
     int width, height, speed;
     int up, down, leftd, rightd, key;
     char direction;
-    controls(/* args */);
-    ~controls();
+    controls() = default;
+    ~controls() = default;
+    void setOptions();
+    void setControls();
+    void toCorrect(int &x);
 };
 #endif
