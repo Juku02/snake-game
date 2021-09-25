@@ -1,26 +1,31 @@
 #ifndef ELEMENTS_H
 #define ELEMENTS_H
 
-class snake
+#include <control.hpp>
+#include <matrix.hpp>
+#include <time.h>
+#include <cstdlib>
+
+class Snake
 {
 private:
 public:
     int snakeX, snakeY;
-    char snakeSymbol = 48;
+    char snakeChar = 48;
     int lenght = 3;
-    snake() = default;
-    ~snake() = default;
+    Snake() = default;
+    ~Snake() = default;
     void snakePosition();
 };
 
-class food
+class Food
 {
 private:
 public:
     int foodX, foodY;
     char foodChar = 35;
-    food() = default;
-    ~food() = default;
+    Food() = default;
+    ~Food() = default;
     void foodPosition();
 };
 

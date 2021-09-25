@@ -1,16 +1,18 @@
-#ifndef CONTROLS_H
-#define CONTROLS_H
+#ifndef CONTROL_H
+#define CONTROL_H
 
-class controls
+#include <iostream>
+
+class Control
 {
 private:
-   
 public:
     int width, height, speed;
     int up, down, leftd, rightd, key;
     char direction;
-    controls() = default;
-    ~controls() = default;
+
+    Control() = default;
+    ~Control() = default;
     void setOptions();
     void setControls();
     void toCorrect(int &x);

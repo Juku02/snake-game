@@ -1,6 +1,10 @@
 #ifndef GAMEHANDLER_H
 #define GAMEHANDLER_H
 
+#include<control.hpp>
+#include<elements.hpp>
+#include<matrix.hpp>
+
 class GameHandler
 {
 private:
