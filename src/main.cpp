@@ -1,9 +1,13 @@
-#include<iostream>
-#include"../include/graphics/nCursesTest.hpp"
+#include <iostream>
+#include "window/window.hpp"
 
 int main(int argc, char const *argv[])
 {
-    nCursesTest test;
-    test.makeWindow();
+    // Snake sk;
+    // Food fd;
+    Window window(30, 30);
+    window.initWindow();
+    //    mat.initBoard();
+    //    mat.drawBoard(sk,fd);
     return 0;
 }

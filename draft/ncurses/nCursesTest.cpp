@@ -30,7 +30,8 @@ void makeWindow()
     int startx = (COLS - 800) / 2;
     window = newwin(800, 800, starty, startx);
     printw("Type any character to see it in bold\n");
-	ch = getch();	
+    
+	ch =  getch();	
    
    
 }

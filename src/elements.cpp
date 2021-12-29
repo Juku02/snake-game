@@ -1,16 +1,16 @@
-#include "../include/elements.hpp"
+#include "elements.hpp"
 
-void Snake::snakePosition()
+void Elements::snakePosition()
 {
     srand(time(NULL));
-    snakeX = rand() % control.width;
+    snakeX = rand() % width;
     snakeY = rand() % control.height;
 
     ma.board[snakeX][snakeY] = 's';
 
 }
 
-void Food::foodPosition()
+void Elements::foodPosition()
 {
     srand(time(NULL));
     foodX = rand() % control.width;
